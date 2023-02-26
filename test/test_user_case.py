@@ -12,7 +12,7 @@ import numpy as np
 from src.models.hmm import HiddenMarkovModel
 from src.models.decoders import ViterbiAlgorithm
 
-def test_dims(obs: np.ndarray, hid: np.ndarray, priors: np.ndarray, trans: np.ndarray, emits: np.ndarray, obs_seq: np.ndarray, hid_seq: np.ndarray):
+def _test_dims(obs: np.ndarray, hid: np.ndarray, priors: np.ndarray, trans: np.ndarray, emits: np.ndarray, obs_seq: np.ndarray, hid_seq: np.ndarray):
     assert len(obs) == len(hid)
     assert priors.shape[0] == len(obs)
     assert trans.shape == emits.shape
@@ -64,9 +64,9 @@ def test_use_case_lecture():
     assert np.alltrue(use_case_decoded_hidden_states == use_case_one_data['hidden_states'])
 
     # Check HMM dimensions and ViterbiAlgorithm
-    test_dims(observation_states, hidden_states, use_case_one_hmm.prior_probabilities, use_case_one_hmm.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_one_hmm.prior_probabilities, use_case_one_hmm.transition_probabilities, 
         use_case_one_hmm.emission_probabilities, use_case_one_data['observation_states'], use_case_one_data['hidden_states'])
-    test_dims(observation_states, hidden_states, use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_viterbi.hmm_object.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_viterbi.hmm_object.transition_probabilities, 
         use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_data['observation_states'], use_case_one_data['hidden_states'])
 
 
@@ -109,9 +109,9 @@ def test_user_case_one():
     assert np.alltrue(use_case_decoded_hidden_states == use_case_one_data['hidden_states'])
 
     # Check HMM dimensions and ViterbiAlgorithm
-    test_dims(observation_states, hidden_states, use_case_one_hmm.prior_probabilities, use_case_one_hmm.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_one_hmm.prior_probabilities, use_case_one_hmm.transition_probabilities, 
         use_case_one_hmm.emission_probabilities, use_case_one_data['observation_states'], use_case_one_data['hidden_states'])
-    test_dims(observation_states, hidden_states, use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_viterbi.hmm_object.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_viterbi.hmm_object.transition_probabilities, 
         use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_data['observation_states'], use_case_one_data['hidden_states'])
 
 
@@ -159,9 +159,9 @@ def test_user_case_two():
     assert np.alltrue(use_case_decoded_hidden_states == seq_hidden_states)
 
     # Check HMM dimensions and ViterbiAlgorithm
-    test_dims(observation_states, hidden_states, use_case_two_hmm.prior_probabilities, use_case_two_hmm.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_two_hmm.prior_probabilities, use_case_two_hmm.transition_probabilities, 
         use_case_two_hmm.emission_probabilities, seq_observed_states, seq_hidden_states)
-    test_dims(observation_states, hidden_states, use_case_two_viterbi.hmm_object.prior_probabilities, use_case_two_viterbi.hmm_object.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_two_viterbi.hmm_object.prior_probabilities, use_case_two_viterbi.hmm_object.transition_probabilities, 
         use_case_two_viterbi.hmm_object.emission_probabilities, seq_observed_states, seq_hidden_states)
 
 
@@ -209,7 +209,7 @@ def test_user_case_three():
     assert np.alltrue(use_case_decoded_hidden_states == seq_hidden_states)
 
     # Check HMM dimensions and ViterbiAlgorithm
-    test_dims(observation_states, hidden_states, use_case_three_hmm.prior_probabilities, use_case_three_hmm.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_three_hmm.prior_probabilities, use_case_three_hmm.transition_probabilities, 
         use_case_three_hmm.emission_probabilities, seq_observed_states, seq_hidden_states)
-    test_dims(observation_states, hidden_states, use_case_three_viterbi.hmm_object.prior_probabilities, use_case_three_viterbi.hmm_object.transition_probabilities, 
+    _test_dims(observation_states, hidden_states, use_case_three_viterbi.hmm_object.prior_probabilities, use_case_three_viterbi.hmm_object.transition_probabilities, 
         use_case_three_viterbi.hmm_object.emission_probabilities, seq_observed_states, seq_hidden_states)
