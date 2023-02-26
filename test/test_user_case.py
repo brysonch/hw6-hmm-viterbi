@@ -167,7 +167,7 @@ def test_user_case_three():
     assert np.allclose(use_case_three_viterbi.hmm_object.emission_probabilities, use_case_three_hmm.emission_probabilities)
 
     # Find the best hidden state path for our observation states
-    seq_observed_states = np.array(['happy', 'happy', 'happy', 'happy', 'sad', 'sad'])
+    seq_observed_states = np.array(['happy', 'sad', 'sad', 'happy', 'happy', 'sad'])
     seq_hidden_states = np.array(['Mission-Bay', 'Mission-Bay', 'Mission-Bay', 'Mission-Bay', 'Parnassus', 'Parnassus'])
     use_case_decoded_hidden_states = use_case_three_viterbi.best_hidden_state_sequence(seq_observed_states)
     assert np.alltrue(use_case_decoded_hidden_states == seq_hidden_states)
