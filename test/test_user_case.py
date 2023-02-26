@@ -1,9 +1,10 @@
 """
 UCSF BMI203: Biocomputing Algorithms
-Author:
-Date: 
-Program: 
-Description:
+Author: Bryson Choy
+Date: 02/24/23
+Program: BMI
+Description: This test file contains 3 use cases for the ViterbiAlgorithm with tests for 3 different hypotheses: whether rotation lab funding dictates 
+the dedication of a graduate student, whether 
 """
 import pytest
 import numpy as np
@@ -90,7 +91,43 @@ def test_user_case_one():
 def test_user_case_two():
     """_summary_
     """
-    # TODO
+    # index annotation observation_states=[i,j]    
+    observation_states = ['Warriors-win','Warriors-lose'] 
+
+    # index annotation hidden_states=[i,j]
+    hidden_states = ['practice','no-practice']
+
+    # PONDERING QUESTION: How would a user define/compute their own HMM instantiation inputs to decode the hidden states for their use case observations?
+    use_case_two_priors = np.array([0.7, 0.3])
+    use_case_two_transitions = np.array([[0.9, 0.1],
+                                        [0.2, 0.8]])
+    use_case_two_emissions = np.array([[0.95, 0.05],
+                                        [0.15, 0.85]])
+
+    # Instantiate submodule class models.HiddenMarkovModel with
+    # observation and hidden states and prior, transition, and emission probabilities.
+    use_case_two_hmm = HiddenMarkovModel(observation_states,
+                                         hidden_states,
+                      use_case_two_priors, # prior probabilities of hidden states in the order specified in the hidden_states list
+                      use_case_two_transitions, # transition_probabilities[:,hidden_states[i]]
+                      use_case_two_emissions) # emission_probabilities[hidden_states[i],:][:,observation_states[j]]
+
+    # Instantiate submodule class models.ViterbiAlgorithm using the use case one HMM 
+    use_case_two_viterbi = ViterbiAlgorithm(use_case_two_hmm)
+
+     # Check if use case one HiddenMarkovAlgorithm instance is inherited in the subsequent ViterbiAlgorithm instance
+    assert use_case_two_viterbi.hmm_object.observation_states == use_case_two_hmm.observation_states
+    assert use_case_two_viterbi.hmm_object.hidden_states == use_case_two_hmm.hidden_states
+
+    assert np.allclose(use_case_two_viterbi.hmm_object.prior_probabilities, use_case_two_hmm.prior_probabilities)
+    assert np.allclose(use_case_two_viterbi.hmm_object.transition_probabilities, use_case_two_hmm.transition_probabilities)
+    assert np.allclose(use_case_two_viterbi.hmm_object.emission_probabilities, use_case_two_hmm.emission_probabilities)
+
+    # Find the best hidden state path for our observation states
+    seq_observed_states = np.array(['Warriors-lose', 'Warriors-lose', 'Warriors-lose', 'Warriors-win', 'Warriors-lose', 'Warriors-win'])
+    seq_hidden_states = np.array(['no-practice', 'no-practice', 'no-practice', 'practice', 'no-practice', 'practice'])
+    use_case_decoded_hidden_states = use_case_two_viterbi.best_hidden_state_sequence(seq_observed_states)
+    assert np.alltrue(use_case_decoded_hidden_states == seq_hidden_states)
 
 
 def test_user_case_three():

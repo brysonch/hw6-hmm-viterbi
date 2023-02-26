@@ -1,9 +1,9 @@
 """
 UCSF BMI203: Biocomputing Algorithms
-Author:
-Date: 
-Program: 
-Description:
+Author: Bryson Choy
+Date: 02/24/23
+Program: BMI
+Description: This test file 
 """
 import pytest
 import numpy as np
