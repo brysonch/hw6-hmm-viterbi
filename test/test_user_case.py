@@ -4,7 +4,8 @@ Author: Bryson Choy
 Date: 02/24/23
 Program: BMI
 Description: This test file contains 3 use cases for the ViterbiAlgorithm with tests for 3 different hypotheses: whether rotation lab funding dictates 
-the dedication of a graduate student, whether 
+the dedication of a graduate student, whether practicing dictates the likelihood of the Golden State Warriors winning, and whether the location of a
+grad student's lab affects the happiness of the student.
 """
 import pytest
 import numpy as np
@@ -140,7 +141,6 @@ def test_user_case_three():
     # index annotation hidden_states=[i,j]
     hidden_states = ['Mission-Bay','Parnassus']
 
-    # PONDERING QUESTION: How would a user define/compute their own HMM instantiation inputs to decode the hidden states for their use case observations?
     use_case_three_priors = np.array([0.4, 0.6])
     use_case_three_transitions = np.array([[0.8, 0.2],
                                         [0.2, 0.8]])
@@ -158,7 +158,7 @@ def test_user_case_three():
     # Instantiate submodule class models.ViterbiAlgorithm using the use case one HMM 
     use_case_three_viterbi = ViterbiAlgorithm(use_case_three_hmm)
 
-     # Check if use case one HiddenMarkovAlgorithm instance is inherited in the subsequent ViterbiAlgorithm instance
+     # Check if use case three HiddenMarkovAlgorithm instance is inherited in the subsequent ViterbiAlgorithm instance
     assert use_case_three_viterbi.hmm_object.observation_states == use_case_three_hmm.observation_states
     assert use_case_three_viterbi.hmm_object.hidden_states == use_case_three_hmm.hidden_states
 
@@ -168,6 +168,6 @@ def test_user_case_three():
 
     # Find the best hidden state path for our observation states
     seq_observed_states = np.array(['happy', 'sad', 'sad', 'happy', 'happy', 'sad'])
-    seq_hidden_states = np.array(['Mission-Bay', 'Mission-Bay', 'Mission-Bay', 'Mission-Bay', 'Parnassus', 'Parnassus'])
+    seq_hidden_states = np.array(['Mission-Bay', 'Parnassus', 'Parnassus', 'Mission-Bay', 'Mission-Bay', 'Mission-Bay'])
     use_case_decoded_hidden_states = use_case_three_viterbi.best_hidden_state_sequence(seq_observed_states)
     assert np.alltrue(use_case_decoded_hidden_states == seq_hidden_states)
