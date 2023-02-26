@@ -1,17 +1,17 @@
 import numpy as np
 class HiddenMarkovModel:
-    """_summary_
+    """This is the class definition for the HMM object with no methods, only an __init__ for all object attributes
     """
 
     def __init__(self, observation_states: np.ndarray, hidden_states: np.ndarray, prior_probabilities: np.ndarray, transition_probabilities: np.ndarray, emission_probabilities: np.ndarray):
-        """_summary_
+        """Initialization and defintiion of HMM attributes and dictionaries to store numerical values for each observation and hidden state
 
         Args:
-            observation_states (np.ndarray): _description_
-            hidden_states (np.ndarray): _description_
-            prior_probabilities (np.ndarray): _description_
-            transition_probabilities (np.ndarray): _description_
-            emission_probabilities (np.ndarray): _description_
+            observation_states (np.ndarray): set of possible observation states for the HMM
+            hidden_states (np.ndarray): set of possible hidden states for the HMM
+            prior_probabilities (np.ndarray): initial prior probabilities to get initial hidden state
+            transition_probabilities (np.ndarray): square matrix of transition probabilities between hidden states
+            emission_probabilities (np.ndarray): square matrix of emission probabilities for each observed state
         """             
         self.observation_states = observation_states
         self.observation_states_dict = {observation_state: observation_state_index \
