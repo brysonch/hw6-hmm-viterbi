@@ -82,7 +82,7 @@ def test_user_case_one():
     assert np.allclose(use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_hmm.emission_probabilities)
 
     # TODO: Check HMM dimensions and ViterbiAlgorithm
-    assert 
+    #assert 
     
     # Find the best hidden state path for our observation states
     use_case_decoded_hidden_states = use_case_one_viterbi.best_hidden_state_sequence(use_case_one_data['observation_states'])
