@@ -14,7 +14,7 @@ from src.models.decoders import ViterbiAlgorithm
 
 def test_dims(obs: np.ndarray, hid: np.ndarray, priors: np.ndarray, trans: np.ndarray, emits: np.ndarray, obs_seq: np.ndarray, hid_seq: np.ndarray):
     assert len(obs) == len(hid)
-    assert priors.shape == len(obs)
+    assert priors.shape[0] == len(obs)
     assert trans.shape == emits.shape
     assert obs_seq.shape == hid_seq.shape
 
