@@ -13,8 +13,8 @@ from src.models.hmm import HiddenMarkovModel
 from src.models.decoders import ViterbiAlgorithm
 
 def test_dims(obs: np.ndarray, hid: np.ndarray, priors: np.ndarray, trans: np.ndarray, emits: np.ndarray, obs_seq: np.ndarray, hid_seq: np.ndarray):
-    assert obs.shape == hid.shape
-    assert priors.shape == obs.shape
+    assert len(obs) == len(hid)
+    assert priors.shape == len(obs)
     assert trans.shape == emits.shape
     assert obs_seq.shape == hid_seq.shape
 
@@ -123,10 +123,10 @@ def test_user_case_two():
     of the Viterbi HMM inheritance, and whether the ViterbiAlgorithm best_hidden_state_sequence method finds the correct sequence of hidden states.
     """
     # index annotation observation_states=[i,j]    
-    observation_states = np.array(['Warriors-win','Warriors-lose']) 
+    observation_states = ['Warriors-win','Warriors-lose'] 
 
     # index annotation hidden_states=[i,j]
-    hidden_states = np.array(['practice','no-practice'])
+    hidden_states = ['practice','no-practice']
 
     # PONDERING QUESTION: How would a user define/compute their own HMM instantiation inputs to decode the hidden states for their use case observations?
     use_case_two_priors = np.array([0.3, 0.7])
@@ -174,10 +174,10 @@ def test_user_case_three():
     method finds the correct sequence of hidden states.
     """
     # index annotation observation_states=[i,j]    
-    observation_states = np.array(['happy','sad']) 
+    observation_states = ['happy','sad'] 
 
     # index annotation hidden_states=[i,j]
-    hidden_states = np.array(['Mission-Bay','Parnassus'])
+    hidden_states = ['Mission-Bay','Parnassus']
 
     use_case_three_priors = np.array([0.4, 0.6])
     use_case_three_transitions = np.array([[0.8, 0.2],
