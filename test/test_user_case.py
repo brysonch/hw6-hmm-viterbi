@@ -69,8 +69,6 @@ def test_use_case_lecture():
     test_dims(observation_states, hidden_states, use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_viterbi.hmm_object.transition_probabilities, 
         use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_data['observation_states'], use_case_one_data['hidden_states'])
 
-    usecaseoneviterbi
-
 
 def test_user_case_one():
     """_summary_
