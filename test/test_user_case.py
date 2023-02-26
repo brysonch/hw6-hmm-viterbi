@@ -82,6 +82,7 @@ def test_user_case_one():
     assert np.allclose(use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_hmm.emission_probabilities)
 
     # TODO: Check HMM dimensions and ViterbiAlgorithm
+    assert 
     
     # Find the best hidden state path for our observation states
     use_case_decoded_hidden_states = use_case_one_viterbi.best_hidden_state_sequence(use_case_one_data['observation_states'])
@@ -98,7 +99,7 @@ def test_user_case_two():
     hidden_states = ['practice','no-practice']
 
     # PONDERING QUESTION: How would a user define/compute their own HMM instantiation inputs to decode the hidden states for their use case observations?
-    use_case_two_priors = np.array([0.7, 0.3])
+    use_case_two_priors = np.array([0.3, 0.7])
     use_case_two_transitions = np.array([[0.9, 0.1],
                                         [0.2, 0.8]])
     use_case_two_emissions = np.array([[0.95, 0.05],
